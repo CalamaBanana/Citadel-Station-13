@@ -214,6 +214,22 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 		return 1
 	return 0
 
+/area/proc/verify_atmosalert(danger_level, obj/source)
+	if(danger_level == 0 == atmosalm)
+		for (var/item in GLOB.silicon_mobs)
+			var/mob/living/silicon/aiPlayer = item
+			aiPlayer.cancelAlarm("Atmosphere", src, source)
+		for (var/item in GLOB.alert_consoles)
+			var/obj/machinery/computer/station_alert/a = item
+			a.cancelAlarm("Atmosphere", src, source)
+		for (var/item in GLOB.drones_list)
+			var/mob/living/simple_animal/drone/D = item
+			D.cancelAlarm("Atmosphere", src, source)
+		for(var/item in GLOB.alarmdisplay)
+			var/datum/computer_file/program/alarm_monitor/p = item
+			p.cancelAlarm("Atmosphere", src, source)
+		message_admins("Atmos allarm [source] cleared2")
+
 /area/proc/ModifyFiredoors(opening)
 	if(firedoors)
 		firedoors_last_closed_on = world.time

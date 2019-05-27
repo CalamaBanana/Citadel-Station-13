@@ -735,6 +735,9 @@
 		if (!(AA.stat & (NOPOWER|BROKEN)) && !AA.shorted)
 			new_area_danger_level = max(new_area_danger_level,AA.danger_level)
 	if(A.atmosalert(new_area_danger_level,src)) //if area was in normal state or if area was in alert state
+		for(var/obj/machinery/airalarm/AA in A)
+			A.verify_atmosalert(AA.danger_level, AA)
+			AA.update_icon()
 		post_alert(new_area_danger_level)
 
 	update_icon()

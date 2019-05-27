@@ -122,7 +122,8 @@
 	if(!is_operational())
 		return
 	var/area/A = get_area(src)
-	A.firereset(src)
+	for(var/obj/machinery/firealarm/FA in A)
+		A.firereset(FA)
 
 /obj/machinery/firealarm/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
 									datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
